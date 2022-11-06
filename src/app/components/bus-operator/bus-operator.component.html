@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="heading">
+        <h1>Transport of NSW - Bus operators</h1>
+    </div>
+    <div class="list">
+        <div class="tile" *ngFor="let operator of operators; let ind = index">
+            <a class="link" href="/bus-operator-details?name={{operator.name}}" >
+            {{operator.name}} - {{operator.date}}</a>
+        </div>
+    </div>
+</div>

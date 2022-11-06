@@ -1,0 +1,34 @@
+<div class="container">
+    <a href="/bus-operators-list">&#62; Back</a>
+    <div class="heading">
+        <h1>{{busOperator?.name}} - {{busOperator?.date}}</h1>
+    </div>
+    <table class="table">
+        <thead>
+            <tr class="table-heading">
+                <th scope="col">Bus ID</th>
+                <th scope="col">Route Variant</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of busOperatorDetails">
+                <td>{{item.id}}</td>
+                <td [innerHTML]= "item.routeVariant | boldStringPipe" ></td>
+                <td [ngClass]="{'late': calculateStatus(item.deviationFromTimetable) === 'Late',
+                'ontime': calculateStatus(item.deviationFromTimetable) === 'On time',
+                'early': calculateStatus(item.deviationFromTimetable) === 'Early',
+                'unknown': calculateStatus(item.deviationFromTimetable) === 'Unknown'}">
+                {{calculateStatus(item.deviationFromTimetable)}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="notes">
+        <textarea class="text-area" rows="3"  [id]="'notes'" placeholder="Enter notes here"
+            [innerHTML] = getNotes(busOperator?.name)>
+        </textarea>
+        <button type="button" class="btn btn-primary btn-save" (click)="saveNotes(busOperator?.name);">
+            Save Notes
+        </button>
+    </div>
+</div>
